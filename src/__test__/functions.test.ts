@@ -10,30 +10,48 @@ test("should change boolean", () => {
   expect(todoItem.done).toBe(true);
 });
 
-describe("addtodo", () => {
-  test("should add to list", () => {
+describe("addTodo", () => {
+  test("should add to list if string > 2", () => {
     let todos: Todo[] = [];
     let todoText: string = "studdy";
     addTodo(todoText, todos);
 
     expect(todos.length).toBe(1);
+    expect(todos[todos.length - 1].text).toBe("studdy");
   });
 
-  test("should not add to list", () => {
+  test("should not add to list if string < 2", () => {
     let todos: Todo[] = [];
-    let todoText: string = "st";
+    let todoText: string = "t";
     addTodo(todoText, todos);
 
     expect(todos.length).toBe(0);
   });
 
-  test("should return errormessage", () => {
+  test("should set errormessage", () => {
     let todos: Todo[] = [];
-    let todoText: string = "st";
+    let todoText: string = "j";
 
     let respons: IAddResponse = addTodo(todoText, todos);
 
     expect(respons.error).toBe("Du måste ange minst två bokstäver");
+  });
+
+  test("should set success to true", () => {
+    let todos: Todo[] = [];
+    let todoText: string = "hej";
+
+    let respons: IAddResponse = addTodo(todoText, todos);
+
+    expect(respons.success).toBe(true);
+  });
+  test("should set success to false", () => {
+    let todos: Todo[] = [];
+    let todoText: string = "j";
+
+    let respons: IAddResponse = addTodo(todoText, todos);
+
+    expect(respons.success).toBe(false);
   });
 
   test("should set done to false", () => {
