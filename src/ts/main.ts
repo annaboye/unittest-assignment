@@ -11,6 +11,9 @@ export function init() {
   document.getElementById("clearTodos")?.addEventListener("click", () => {
     exports.clearTodos(todos);
   });
+  document.getElementById("sort")?.addEventListener("click", () => {
+    exports.sortTodos(todos);
+  });
 
   (document.getElementById("newTodoForm") as HTMLFormElement)?.addEventListener(
     "submit",
@@ -62,6 +65,7 @@ export function createHtml(todos: Todo[]) {
 
     todosContainer.appendChild(li);
   }
+  console.log(todosContainer.innerHTML);
 }
 
 export function toggleTodo(todo: Todo) {
@@ -86,4 +90,20 @@ export function displayError(error: string, show: boolean) {
 export function clearTodos(todos: Todo[]) {
   removeAllTodos(todos);
   exports.createHtml(todos);
+}
+
+export function sortTodos(todos: Todo[]) {
+  todos.sort((a, b) => {
+    let fa = a.text.toLowerCase(),
+      fb = b.text.toLowerCase();
+
+    if (fa < fb) {
+      return -1;
+    }
+    if (fa > fb) {
+      return 1;
+    }
+    return 0;
+  });
+  createHtml(todos);
 }
