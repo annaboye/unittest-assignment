@@ -8,6 +8,10 @@ import { IAddResponse } from "../ts/models/IAddResult";
 import { describe, test, expect, jest, beforeEach } from "@jest/globals";
 
 describe("clearTodos", () => {
+  beforeEach(() => {
+    jest.resetModules();
+    jest.restoreAllMocks();
+  });
   test("should call 2 functions", () => {
     let spy = jest.spyOn(mainfunctions, "createHtml").mockReturnValue();
     let spyAgain = jest.spyOn(functions, "removeAllTodos").mockReturnValue();
@@ -159,6 +163,19 @@ describe("displayError", () => {
 
     expect((document.getElementById("error") as HTMLDivElement).innerHTML).toBe(
       "du måste ange"
+    );
+  });
+  test("should remove class", () => {
+    document.body.innerHTML = `<div id="error" class="error show"></div>`;
+
+    mainfunctions.displayError("du måste ange", false);
+
+    expect(
+      (document.getElementById("error") as HTMLDivElement).classList.length
+    ).toBe(1);
+
+    expect((document.getElementById("error") as HTMLDivElement).className).toBe(
+      "error"
     );
   });
 });
