@@ -1,4 +1,7 @@
 # Inlämningsuppgift 1 - Enhetstester med jest
+Detta var en inlämningsuppgift i kursen "Testning" på Medieinstitutet.
+
+## Orginal uppgiften:
 
 Syftet med detta repo är att det skall fungera som er kod som ni får given. Ni skall inte ändra på funktionaliteten som nu finns på något sätt. För att komma igång med inlämningen behöver ni göra följande:
 
